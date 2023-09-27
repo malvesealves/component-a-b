@@ -1,0 +1,78 @@
+<div class="card border-dark mt-3">
+    <div class="card-body">
+        <h4 class="card-title font-weight-bold">Responsável</h4>
+        <form [formGroup]="ownerForm">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="inputOwnerName" formControlName="ownerName"
+                        placeholder="Nome">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">Contato</h5>
+                            <div formGroupName="ownerContact" class="form-row">
+                                <div class="form-group col-md-3">
+                                    <input type="text" class="form-control" id="inputOwnerName" formControlName="ddd"
+                                        placeholder="DDD">
+                                </div>
+                                <div class="form-group col-md-9">
+                                    <input type="text" class="form-control" id="inputOwnerName" formControlName="number"
+                                        placeholder="Número">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">Endereço</h5>
+                            <div formGroupName="ownerAddress">
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="CEP"
+                                                formControlName="cep" aria-label="Username"
+                                                aria-describedby="basic-addon1">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon1" (click)="searchCep(ownerForm.controls['ownerAddress'].controls['cep'])"><i
+                                                        class="fa-solid fa-magnifying-glass"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-9">
+                                        <input type="text" class="form-control" id="inputOwnerName"
+                                            formControlName="logradouro" placeholder="Logradouro">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <input type="text" class="form-control" id="inputOwnerName"
+                                            formControlName="complemento" placeholder="Complemento">
+                                    </div>
+                                    <div class="form-group col-md-7">
+                                        <input type="text" class="form-control" id="inputOwnerName"
+                                            formControlName="bairro" placeholder="Bairro">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <input type="text" class="form-control" id="inputOwnerName"
+                                            formControlName="localidade" placeholder="Localidade">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" class="form-control" id="inputOwnerName" formControlName="uf"
+                                            placeholder="UF">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
