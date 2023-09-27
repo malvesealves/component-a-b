@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms';
 import { ViaCepService } from '../external-api/via-cep.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-owner',
@@ -8,40 +9,61 @@ import { ViaCepService } from '../external-api/via-cep.service';
   styleUrls: ['./owner.component.css']
 })
 export class OwnerComponent {
-  constructor(private viaCepService: ViaCepService) { }
+  constructor(private viaCepService: ViaCepService,
+    private rootFormGroup: FormGroupDirective) { }
 
-  ownerForm = new FormGroup({
-    ownerName: new FormControl(''),
-    ownerContact: new FormGroup({
-      ddd: new FormControl(''),
-      number: new FormControl(''),
-    }),
-    ownerAddress: new FormGroup({
-      cep: new FormControl(''),
-      logradouro: new FormControl(''),
-      complemento: new FormControl(''),
-      bairro: new FormControl(''),
-      localidade: new FormControl(''),
-      uf: new FormControl('')
-    }),
-  });
+  private eventsSubscription: Subscription = new Subscription();
+  @Input() events: Observable<void> = new Observable<void>;
+
+  @Input() formGroupName: string = '';
+  form: FormGroup = new FormGroup('');
+
+  ngOnInit() {
+    this.form = this.rootFormGroup.control.get(this.formGroupName) as FormGroup;
+    this.eventsSubscription = this.events.subscribe(() => this.clearOwnerForm(false))
+  }
 
   searchCep(param: any) {
-    const viaCep = this.viaCepService.externalSearchCep(param.value);
+    const viaCep = this.viaCepService.externalSearchCep(param.value.cep);
 
     this.viaCepService.currentMessage.subscribe((data: any) => {
       if (data != 'null') {
         this.updateAddressFields(data);
-      } else {
-        window.alert('Erro ao consultar CEP com webservice ViaCep');
       }
     });
   }
 
   updateAddressFields(result: any) {
-    this.ownerForm.controls['ownerAddress'].controls['logradouro'].setValue(result.logradouro);
-    this.ownerForm.controls['ownerAddress'].controls['bairro'].setValue(result.bairro);
-    this.ownerForm.controls['ownerAddress'].controls['localidade'].setValue(result.localidade);
-    this.ownerForm.controls['ownerAddress'].controls['uf'].setValue(result.uf);
+    this.clearOwnerForm(true);
+
+    this.form.controls['address'].get('logradouro')?.setValue(result.logradouro);
+    this.form.controls['address'].get('bairro')?.setValue(result.bairro);
+    this.form.controls['address'].get('localidade')?.setValue(result.localidade);
+    this.form.controls['address'].get('uf')?.setValue(result.uf);
+  }
+
+  clearOwnerForm(onlyAddress: boolean) {
+    if (onlyAddress) {      
+      this.form.controls['address'].get('logradouro')?.setValue('');
+      this.form.controls['address'].get('bairro')?.setValue('');
+      this.form.controls['address'].get('localidade')?.setValue('');
+      this.form.controls['address'].get('uf')?.setValue('');
+    } else {
+      this.form.setValue({
+        name: '',
+        contact: {
+          ddd: '',
+          number: ''
+        },
+        address: {
+          cep: '',
+          logradouro: '',
+          complemento: '',
+          bairro: '',
+          localidade: '',
+          uf: ''
+        }
+      });
+    }
   }
 }

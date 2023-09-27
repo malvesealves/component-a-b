@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="card border-dark mt-2">
-        <div class="card-body">
-            <h4 class="card-title font-weight-bold">Animal</h4>
-            <form [formGroup]="petForm">
+<ng-container [formGroup]="petForm">
+    <div class="container">
+        <div class="card border-dark mt-2">
+            <div class="card-body">
+                <h4 class="card-title font-weight-bold">Animal</h4>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <select class="btn btn-secondary dropdown-toggle" id="dropdownPetTypeButton"
@@ -18,16 +18,17 @@
                     <div class="form-group col-md-2">
                         <div class="input-group">
                             <input type="text" class="form-control" aria-label="Text input with dropdown button"
-                                id="inputPetAge" formControlName="petAge" placeholder="Idade">                            
+                                id="inputPetAge" formControlName="petAge" placeholder="Idade">
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
+        <app-owner [events]="eventsSubject.asObservable()" formGroupName="owner"></app-owner>
+        <div class="text-right mt-3">
+            <button type="button" class="btn btn-warning mr-2" (click)="clearForm()">Limpar</button>
+            <button type="button" class="btn btn-primary" (click)="submitForm()">Salvar</button>
+        </div>
+        <app-table [events]="eventsSubjectTable.asObservable()"></app-table>
     </div>
-    <app-owner></app-owner>
-    <div class="text-right mt-3">
-        <button type="button" class="btn btn-primary">Salvar</button>
-    </div>
-    <app-table></app-table>
-</div>
+</ng-container>

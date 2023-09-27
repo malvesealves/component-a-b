@@ -1,35 +1,24 @@
-<div class="card border-dark mt-3">
-    <div class="card-body">
-        <h4 class="card-title font-weight-bold">Registros</h4>    
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Tipo</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Responsável</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
-              </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
-              </tr>
-              <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
-              </tr>
-            </tbody>
-          </table>
-    </div>
+<div class="card border-dark mt-3 mb-2">
+  <div class="card-body">
+    <h4 class="card-title font-weight-bold">Registros</h4>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Responsável</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of groups">
+          <th>{{ item.tipo }}</th>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.responsavel }}</td>
+          <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

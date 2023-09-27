@@ -1,10 +1,10 @@
 <div class="card border-dark mt-3">
     <div class="card-body">
         <h4 class="card-title font-weight-bold">Responsável</h4>
-        <form [formGroup]="ownerForm">
+        <form [formGroup]="form">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <input type="text" class="form-control" id="inputOwnerName" formControlName="ownerName"
+                    <input type="text" class="form-control" id="inputOwnerName" formControlName="name"
                         placeholder="Nome">
                 </div>
             </div>
@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">Contato</h5>
-                            <div formGroupName="ownerContact" class="form-row">
+                            <div formGroupName="contact" class="form-row">
                                 <div class="form-group col-md-3">
                                     <input type="text" class="form-control" id="inputOwnerName" formControlName="ddd"
                                         placeholder="DDD">
@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold">Endereço</h5>
-                            <div formGroupName="ownerAddress">
+                            <div formGroupName="address">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
                                         <div class="input-group">
@@ -38,7 +38,7 @@
                                                 formControlName="cep" aria-label="Username"
                                                 aria-describedby="basic-addon1">
                                             <div class="input-group-append">
-                                                <span class="input-group-text" id="basic-addon1" (click)="searchCep(ownerForm.controls['ownerAddress'].controls['cep'])"><i
+                                                <span class="input-group-text" id="basic-addon1" (click)="searchCep(form.controls['address'])"><i
                                                         class="fa-solid fa-magnifying-glass"></i></span>
                                             </div>
                                         </div>
