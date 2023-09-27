@@ -9,7 +9,7 @@ import { Subscription, Observable } from 'rxjs';
 export class TableComponent {
   private eventsSubscription: Subscription = new Subscription();
   @Input() events: Observable<void> = new Observable<void>;
-  dataList: object[] = [];
+  dataList: any[] = [];
 
   ngOnInit() {
     this.eventsSubscription = this.events.subscribe(() => this.listData())
