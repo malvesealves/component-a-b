@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 
 @Component({
@@ -23,7 +22,7 @@ export class TableComponent {
   */
   listData() {
     const getList = async () => {
-      let url = 'http://127.0.0.1:5000/pets';
+      let url = 'http://127.0.0.1:8000/pets';
       fetch(url, {
         method: 'get',
       })
@@ -38,30 +37,35 @@ export class TableComponent {
     }
   }
 
-  groups = [
-    {
-      "tipo": 1,
-      "nome": "Leanne Graham",
-      "responsavel": "Bret",
-
-    },
-    {
-      "tipo": 2,
-      "nome": "Ervin Howell",
-      "responsavel": "Antonette"
-    }
-  ]
-
   /*
   --------------------------------------------------------------------------------------
-  Função para inserir items na lista apresentada
+  Função para inserir pets na lista apresentada
   --------------------------------------------------------------------------------------
-*/
+  */
   insertList(tipo: any, nome: any, responsavel: any) {        
     this.dataList.push({
       "tipo": tipo,
       "nome": nome,
       "responsavel": responsavel
     })
+  }
+
+  /*
+  --------------------------------------------------------------------------------------
+  Função para deletar pet na lista apresentada através do nome
+  --------------------------------------------------------------------------------------
+  */
+  deleteItem(nomePet: any)
+  {
+    const getList = async () => {
+      let url = 'http://127.0.0.1:8000/pet?nome=' + nomePet;
+      fetch(url, {
+        method: 'delete',
+      })
+        .then((response) => response.json())       
+        .catch((error) => {
+          console.error('Erro ao deletar pets:', error);
+        });
+    }
   }
 }

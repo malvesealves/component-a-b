@@ -12,11 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of groups">
+        <tr *ngFor="let item of dataList">
           <th>{{ item.tipo }}</th>
           <td>{{ item.nome }}</td>
           <td>{{ item.responsavel }}</td>
-          <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
+          <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px" (click)="deleteItem(item.nome)"></th>
         </tr>
       </tbody>
     </table>

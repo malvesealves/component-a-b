@@ -35,7 +35,7 @@ export class PetComponent {
     });
 
     setTimeout(() => {
-      this.listData();      
+      this.listData();
     }, 10);
   }
 
@@ -81,7 +81,19 @@ export class PetComponent {
   }
 
   submitForm() {
-    alert('Teste Submit');
+    const formData = new FormData();
+    formData.append('', this.petForm.value);
+    let url = 'http://127.0.0.1:8000/item';
+    fetch(url, {
+      method: 'post',
+      body: formData
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error('Erro:', error);
+      });
+
+
     console.log(this.petForm.value);
   }
 
